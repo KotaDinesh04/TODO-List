@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Signup.css';
 
-const Signup = () => {
+const Signup = ({flag , setFlag}) => {
     const [email, setEmail] = useState("");
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
@@ -12,11 +12,14 @@ const Signup = () => {
         e.preventDefault();
         console.log("EMAIL:", email, "PASSWORD:", password);
     };
+    const handleLogin = ()=> {
+        setFlag(false);
+    }
 
     return (
-        <div>
+        <div className="signup-container">
             <h2 className='heading'>SignUp</h2>
-            <div className='form'>
+            <div className='form-container'>
                 <form onSubmit={handleSignup}>
                     <div className="input-group">
                         <label htmlFor="email">Email:</label>
@@ -43,6 +46,7 @@ const Signup = () => {
                     <button className="button-input" type='submit'>Sign Up</button>
                 </form>
             </div>
+            <p>Already have an account? <a href="#"onClick={handleLogin}>Login here</a></p>
         </div>
     );
 };

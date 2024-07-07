@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./Login.css";
-export default function Login() {
+export default function Login({flag , setFlag}) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const handleEmailChange=(e)=> {
@@ -10,6 +10,9 @@ export default function Login() {
   const handlePasswordChange = (e)=>{
     setPassword(e.target.value);
     console.log(password);
+  }
+  const handleSignUpClick = ()=>{
+    setFlag(true);
   }
   return (
     <div className="main">  
@@ -32,7 +35,7 @@ export default function Login() {
         </p>
         <p className="common para">
           Don't have an account?{" "}
-          <a href="#" className="anchor">
+          <a href="#" onClick={handleSignUpClick} className="anchor">
             Sign Up
           </a>{" "}
           here.

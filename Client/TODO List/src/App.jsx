@@ -2,14 +2,14 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import Login from './assets/Components/Login/Login'
+import Login from './Components/Login/Login'
+import Signup from './Components/Signup/Signup'
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  const [flag,setFlag] = useState(false);
   return (
     <>
-      <Login/>
+      {flag ? <Signup flag = {flag} setFlag={setFlag}/> : <Login flag = {flag} setFlag={setFlag}/>};
     </>
   )
 }
