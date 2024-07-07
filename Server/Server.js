@@ -10,7 +10,7 @@ app.use(cors());
 app.use(express.json());
 
 //MongoDB Connection->
-mongoose.connect(process.env.MONGO_URL, {
+mongoose.connect('mongodb+srv://admin:admin@todolist.xkgge0r.mongodb.net/?retryWrites=true&w=majority&appName=TODOList', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 }).then(()=> {
