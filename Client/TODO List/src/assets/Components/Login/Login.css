@@ -1,0 +1,38 @@
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  .loginParent {
+    width: 50%;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+  }
+.head {
+    margin-top: 7%;
+    
+}
+.common {
+    margin-left: 6%;
+}
+.anchor {
+    text-decoration: none;
+}
+.para {
+    font-size: medium;
+    font-family: cursive;
+}
+.btn {
+    width: 50%;
+}
+.form {
+    width: 50%;  
+}
+@media (max-width: 600px) {
+    .loginParent{
+        width: 100%;
+    }
+}
