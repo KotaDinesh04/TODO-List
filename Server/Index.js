@@ -19,7 +19,7 @@ const loginRoute = require('./routes/LoginRoute');
 const signupModel = require('./models/signup');
 const signupRoute = require('./routes/SignupRoute');
 
-// app.use('/api',loginRoute);
+app.use('/api',loginRoute);
 app.use('/api',signupRoute);
 
 app.listen(port, () => {

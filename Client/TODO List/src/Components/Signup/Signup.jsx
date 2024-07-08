@@ -12,14 +12,14 @@ const Signup = ({flag , setFlag}) => {
     const handleSignup = async (e) => {
         e.preventDefault();
         const name = firstName+" "+lastName;
-        console.log(typeof(name))
+        // console.log(typeof(name))
         try {
             const res = await axios.post('http://localhost:5000/api/signup',{
                 name: name,
                 emailId: email,
                 password: password,
             });
-            console.log("Created user",res.data);
+            // console.log("Created user",res.data);
         } catch(error) {
             console.log("Error connecting to the server",error);
         }
