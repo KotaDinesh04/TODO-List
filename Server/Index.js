@@ -14,10 +14,13 @@ app.use(express.json());
 const makeConnection = require('./MongoDB');
 makeConnection();
 
-const itemModel = require('./models/login');
+const loginModel = require('./models/login');
 const loginRoute = require('./routes/LoginRoute');
+const signupModel = require('./models/signup');
+const signupRoute = require('./routes/SignupRoute');
 
 app.use('/api',loginRoute);
+app.use('/api',signupRoute);
 
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);

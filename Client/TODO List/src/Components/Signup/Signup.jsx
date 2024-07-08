@@ -10,17 +10,19 @@ const Signup = ({flag , setFlag}) => {
 
     const handleSignup = (e) => {
         e.preventDefault();
-        console.log("EMAIL:", email, "PASSWORD:", password);
+        const name = firstName+" "+lastName;
+        console.log("EMAIL:", email, "PASSWORD:", password, "Name:",name);
+        
+
     };
     const handleLogin = ()=> {
         setFlag(false);
     }
-
     return (
         <div className="signup-container">
             <h2 className='heading'>SignUp</h2>
             <div className='form-container'>
-                <form onSubmit={handleSignup}>
+                <form>
                     <div className="input-group">
                         <label htmlFor="email">Email:</label>
                         <input id="email" className="signup-input" type='email' placeholder='Enter valid email id' value={email} onChange={(e) => setEmail(e.target.value)} required/>
@@ -43,7 +45,7 @@ const Signup = ({flag , setFlag}) => {
                         <label htmlFor="confirmPassword">Confirm Password:</label>
                         <input id="confirmPassword" className="signup-input" type='password' placeholder='Confirm Password' value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required/>
                     </div>
-                    <button className="button-input" type='submit'>Sign Up</button>
+                    <button className="button-input" type='submit' onClick={handleSignup}>Sign Up</button>
                 </form>
             </div>
             <p>Already have an account? <a href="#"onClick={handleLogin}>Login here</a></p>
