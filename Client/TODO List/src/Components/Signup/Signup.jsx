@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Signup.css';
+import axios from 'axios';
 
 const Signup = ({flag , setFlag}) => {
     const [email, setEmail] = useState("");
@@ -8,12 +9,22 @@ const Signup = ({flag , setFlag}) => {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
 
-    const handleSignup = (e) => {
+    const handleSignup = async (e) => {
         e.preventDefault();
         const name = firstName+" "+lastName;
-        console.log("EMAIL:", email, "PASSWORD:", password, "Name:",name);
-        
-
+        console.log(typeof(name))
+        try {
+            const res = await axios.post('http://localhost:5000/api/signup',{
+                name: name,
+                emailId: email,
+                password: password,
+            });
+            console.log("Created user",res.data);
+        } catch(error) {
+            console.log("Error connecting to the server",error);
+        }
+        alert("Created user successfully");
+        setFlag(false);
     };
     const handleLogin = ()=> {
         setFlag(false);
