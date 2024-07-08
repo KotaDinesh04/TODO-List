@@ -16,11 +16,14 @@ makeConnection();
 
 const loginModel = require('./models/login');
 const loginRoute = require('./routes/LoginRoute');
+
 const signupModel = require('./models/signup');
 const signupRoute = require('./routes/SignupRoute');
 
+const todoListRoute = require('./routes/TodoList');
 app.use('/api',loginRoute);
 app.use('/api',signupRoute);
+app.use('/api',todoListRoute);
 
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);
