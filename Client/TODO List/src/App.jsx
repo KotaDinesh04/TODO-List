@@ -11,7 +11,7 @@ function App() {
   const [homeFlag, setHomeFlag] = useState(false);  
   return (
     <>
-      {homeFlag ? < Home/> : flag ? <Signup flag = {flag} setFlag={setFlag}/> : <Login flag = {flag} setFlag={setFlag} homeFlag = {homeFlag} setHomeFlag = {setHomeFlag}/>}
+      {flag ? <Signup flag = {flag} setFlag={setFlag}/> : <Login flag = {flag} setFlag={setFlag} homeFlag = {homeFlag} setHomeFlag = {setHomeFlag}/>}
     </>
   )
 }

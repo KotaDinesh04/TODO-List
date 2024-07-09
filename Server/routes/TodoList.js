@@ -57,4 +57,20 @@ router.put('/todolist/:id', async (req, res) => {
     }
 });
 
+//Delete the todo 
+router.delete('/todolist/:id', async (req,res) =>{
+    const id = req.params.id;
+    try {
+        const data = await itemModel.findByIdAndDelete(id);
+        if(!data) {
+            console.log(id);
+            return res.status(404).json({message: "Todo not found"});
+        }
+        res.json({message: "Successfully deleted the todo"});
+    } catch(error) {
+        console.log("Error deleting the todo",error);
+        res.status(500).json({message: "Server Error!!!"});
+    }
+})
+
 module.exports = router;
