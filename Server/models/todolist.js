@@ -11,10 +11,9 @@ const todoSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
-    userId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'signup',
-        // required: true
+    emailId: {
+        type: String,
+        required: true,
     },
     createdAt: {
         type: Date,
