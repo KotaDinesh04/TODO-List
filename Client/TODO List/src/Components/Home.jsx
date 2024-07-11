@@ -1,54 +1,74 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import './Home.css';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import "./Home.css";
+import LoadingBar from "react-top-loading-bar";
 
 export default function Home({ email }) {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState([]);
+  const [progress, setProgress] = useState(0);
+  const [todos, setTodos] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const getArr = async () => {
     try {
-      const response = await axios.post('http://localhost:5000/api/getuserdata', {
-        emailId: email
+      const response = await axios.post("http://localhost:5000/api/getuserdata", {
+        emailId: email,
       });
       setData(response.data);
     } catch (error) {
-      console.log('Error fetching data:', error);
+      console.log("Error fetching data:", error);
+      setError("Error fetching user data");
     }
-  }
+  };
 
   useEffect(() => {
     getArr();
-  }, []); // Fetch data on component mount
+  }, []);
 
-  const handleGetClick = async ()=>{
+  const handleGetClick = async () => {
+    setProgress(20);
+    setLoading(true);
+    setError("");
     await getArr();
-    console.log(data._id);
-    const emailId = data.emailId;
+
     try {
-      const todos = await axios.get('http://localhost:5000/api/todolist',{
-        params: {
-          emailId: email
-        }
+      const response = await axios.get("http://localhost:5000/api/todolist", {
+        params: { emailId: email },
       });
-      console.log(todos.data)
+      console.log(response.data);
+      setTodos(response.data);
     } catch (error) {
-      
+      console.log("Error fetching todos:", error);
+      setError("Error fetching todos");
     }
-    console.log(data);
-  }
+    
+    setProgress(100);
+    setLoading(false);
+  };
 
   return (
     <div>
+      <LoadingBar color="#f11946" progress={progress} onLoaderFinished={() => setProgress(0)} />
       <div className="container">
-        <button className='homeButton' onClick={handleGetClick}>Get Todo's</button>
+        <button className="homeButton" onClick={handleGetClick}>
+          Get Todo's
+        </button>
       </div>
-
-      {data && (
-        <div className="dataContainer">
-      
+      {loading && <p>Loading...</p>}
+      {error && <p className="error">{error}</p>}
+      {todos && (
+        <div className="todosContainer">
+          {todos.map((todo) => (
+            <div key={todo._id} className="todoItem">
+              <p>{todo.title}</p>
+              <p>{todo.description}</p>
+              <p>{todo.createdAt}</p>
+            </div >
+          ))}
         </div>
       )}
+      
     </div>
   );
 }
-

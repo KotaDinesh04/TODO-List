@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Login.css";
 import axios from 'axios';
 import Home from "../Home";
@@ -6,6 +6,16 @@ import Home from "../Home";
 export default function Login({ flag, setFlag, homeFlag, setHomeFlag }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  useEffect(() => {
+    const savedEmail = localStorage.getItem("email");
+    const savedHomeFlag = localStorage.getItem("homeFlag");
+
+    if (savedEmail && savedHomeFlag) {
+      setEmail(savedEmail);
+      setHomeFlag(JSON.parse(savedHomeFlag));
+    }
+  }, [setHomeFlag]);
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -26,6 +36,8 @@ export default function Login({ flag, setFlag, homeFlag, setHomeFlag }) {
         emailId: email,
         password: password,
       });
+      localStorage.setItem("email", email);
+      localStorage.setItem("homeFlag", true);
       setHomeFlag(true); // Set homeFlag to true upon successful login
 
     } catch (error) {
@@ -34,7 +46,6 @@ export default function Login({ flag, setFlag, homeFlag, setHomeFlag }) {
     }
   }
 
-  // Conditionally render based on homeFlag
   return (
     !homeFlag ? (
       <div className="main">
@@ -85,7 +96,7 @@ export default function Login({ flag, setFlag, homeFlag, setHomeFlag }) {
         </div>
       </div>
     ) : (
-      <Home email = {email}/>
+      <Home email={email} setHomeFlag={setHomeFlag} />
     )
   );
 }
