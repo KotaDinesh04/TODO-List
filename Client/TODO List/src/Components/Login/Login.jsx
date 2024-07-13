@@ -50,11 +50,7 @@ export default function Login({ flag, setFlag, homeFlag, setHomeFlag }) {
     !homeFlag ? (
       <div className="main">
         <div className="loginParent">
-          <a href="#" className="anchor">
-            <h2 className="head common">
-              Todo <span style={{ color: "blue" }}>List</span>
-            </h2>
-          </a>
+          <p className="head common" style={{fontSize:"1.9rem"}}>Todo<span style={{color:"blue"}}>List</span></p>
           <p className="common" style={{ marginTop: "5%", fontSize: "20px", fontWeight: "bold", fontFamily: "cursive" }}>
             Sign in to your account
           </p>
